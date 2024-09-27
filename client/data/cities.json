@@ -35,54 +35,6 @@
         "lng": 13.376933665713324
       },
       "id": "98443197"
-    },
-    {
-      "id": "6f62",
-      "cityName": "Koesan",
-      "country": "Korea (the Republic of)",
-      "emoji": "🇰🇷",
-      "date": "2024-09-27T14:41:55.967Z",
-      "notes": "Hello",
-      "position": {
-        "lat": "36.73888412439431",
-        "lng": "127.74902343750001"
-      }
-    },
-    {
-      "id": "ba55",
-      "cityName": "Beijing",
-      "country": "China",
-      "emoji": "🇨🇳",
-      "date": "2024-09-27T14:45:55.609Z",
-      "notes": "I have visit",
-      "position": {
-        "lat": "39.9602803542957",
-        "lng": "116.45507812500001"
-      }
-    },
-    {
-      "id": "d78e",
-      "cityName": "Beltiug",
-      "country": "Romania",
-      "emoji": "🇷🇴",
-      "date": "2024-09-27T14:53:47.922Z",
-      "notes": "",
-      "position": {
-        "lat": "47.57652571374621",
-        "lng": "22.763671875000004"
-      }
-    },
-    {
-      "id": "ebe7",
-      "cityName": "Bir Kalait",
-      "country": "Chad",
-      "emoji": "🇹🇩",
-      "date": "2024-09-27T14:57:03.987Z",
-      "notes": "",
-      "position": {
-        "lat": "16.551961721972525",
-        "lng": "20.917968750000004"
-      }
     }
   ]
 }
