@@ -33,6 +33,7 @@ function Map() {
     if (geolocationPosition)
       setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
   }, [geolocationPosition]);
+
   return (
     <div className={styles.mapContainer}>
       {!geolocationPosition && (

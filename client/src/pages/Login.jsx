@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import PageNav from "../components/PageNav";
 import { useAuth } from "../contexts/FakeAuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
 export default function Login() {
@@ -45,6 +45,12 @@ export default function Login() {
             value={password}
           />
         </div>
+        <p className={styles.text}>
+          Don&apos;t have accaunt?
+          <Link className={styles.link} to="/register">
+            Register
+          </Link>
+        </p>
 
         <div>
           <Button type={"primary"}>Login</Button>

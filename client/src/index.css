@@ -68,6 +68,12 @@ input:focus {
   border-radius: 5px;
 }
 
+@media screen and (max-width: 640px) {
+  .cta:link,
+  .cta:visited {
+    font-size: 1.2rem;
+  }
+}
 /*
 "importCSSModule": {
     "prefix": "csm",

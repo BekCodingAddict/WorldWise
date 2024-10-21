@@ -32,3 +32,10 @@
   text-transform: uppercase;
   cursor: pointer;
 }
+
+@media screen and (max-width: 1024px) {
+  .user {
+    top: 0.8rem;
+    right: 0.5rem;
+  }
+}

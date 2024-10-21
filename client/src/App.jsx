@@ -39,6 +39,7 @@ const Product = lazy(() => import("./pages/Product"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const AppLayout = lazy(() => import("./pages/AppLayout"));
 const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
 const PageNotFound = lazy(() => import("./pages/pageNotFound"));
 
 import CityList from "./components/CityList";
@@ -57,6 +58,7 @@ function App() {
               <Route path="product" element={<Product />} />
               <Route path="pricing" element={<Pricing />} />
               <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
               <Route
                 path="app"
                 element={

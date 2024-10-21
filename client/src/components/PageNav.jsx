@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import styles from "./PageNav.module.css";
 import Logo from "./Logo";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function PageNav() {
   return (
     <nav className={styles.nav}>
       <Logo />
+      <GiHamburgerMenu className={styles.menu} />
       <ul>
         <li>
           <NavLink to="/pricing">Pricing</NavLink>

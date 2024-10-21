@@ -2,7 +2,7 @@
   margin: 0;
   padding: 2.5rem 5rem;
   background-color: var(--color-dark--1);
-  min-height: calc(100vh - 5rem);
+  min-height: calc(100vh);
 }
 
 .product section {
@@ -31,4 +31,37 @@
 
 .product section a {
   margin-top: 2rem;
+}
+
+@media screen and (max-width: 860px) {
+  .product section {
+    width: clamp(70rem, 80%, 80rem);
+  }
+  .product h2 {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .product {
+    padding: 1rem 2rem;
+  }
+
+  .product h2 {
+    font-size: 3rem;
+  }
+
+  .product p {
+    font-size: 1.3rem;
+  }
+
+  .product section {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .product img {
+    max-width: 40rem;
+    gap: 5rem;
+  }
 }
