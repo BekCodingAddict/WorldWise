@@ -1,5 +1,6 @@
 .logo {
   height: 5.2rem;
+  max-width: 100%;
 }
 
 .position {
@@ -10,6 +11,7 @@
 
 @media screen and (max-width: 640px) {
   .logo {
-    height: 3rem;
+    height: 5dvh;
+    max-width: 100%;
   }
 }

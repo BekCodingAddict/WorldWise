@@ -14,7 +14,7 @@
   align-items: center;
 }
 
-.product img {
+.product > img {
   width: 100%;
 }
 
@@ -60,7 +60,7 @@
     grid-template-columns: 1fr;
   }
 
-  .product img {
+  .product > img {
     max-width: 40rem;
     gap: 5rem;
   }
