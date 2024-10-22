@@ -41,7 +41,7 @@ a.ctaLink:visited {
   position: absolute;
   left: 0; /* Hidden to the left initially */
   bottom: 0;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.813);
   transition: all 0.4s ease-in-out; /* Adjust timing to make it smoother */
