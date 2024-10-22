@@ -8,6 +8,7 @@
 
 @media screen and (max-width: 1024px) {
   .app {
+    height: 100dvh;
     flex-direction: column;
   }
 }

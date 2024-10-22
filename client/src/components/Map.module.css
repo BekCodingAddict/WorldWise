@@ -39,7 +39,7 @@
 
 @media screen and (max-width: 1024px) {
   .mapContainer {
-    height: 50%;
+    height: 60%;
   }
   .map {
     height: 100%;

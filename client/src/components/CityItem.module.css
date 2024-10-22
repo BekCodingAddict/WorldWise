@@ -52,3 +52,20 @@
   background-color: var(--color-brand--1);
   color: var(--color-dark--1);
 }
+
+@media screen and (max-width: 1024px) {
+  .cityItem,
+  .cityItem:link,
+  .cityItem:visited {
+    padding: 0.8rem 2rem;
+  }
+  .emoji {
+    font-size: 2.2rem;
+  }
+  .name {
+    font-size: 1.2rem;
+  }
+  .date {
+    font-size: 1.2rem;
+  }
+}

@@ -37,5 +37,14 @@
   .user {
     top: 0.8rem;
     right: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .user img {
+    height: 2.5rem;
+  }
+  .user button {
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
   }
 }

@@ -7,7 +7,7 @@ function Logo({ className }) {
       <img
         src="/logo.png"
         alt="WorldWise logo"
-        className={`${styles.logo} ${styles[className]}`}
+        className={`${styles.logo} ${styles[className]} `}
       />
     </Link>
   );
