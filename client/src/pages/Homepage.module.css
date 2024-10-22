@@ -1,5 +1,5 @@
 .homepage {
-  height: calc(100vh);
+  height: calc(100dvh);
   margin: 0;
   background-image: linear-gradient(
       rgba(36, 42, 46, 0.8),
