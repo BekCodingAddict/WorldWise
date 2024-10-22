@@ -37,6 +37,54 @@ a.ctaLink:visited {
   border-radius: 7px;
 }
 
+.mobileNavContainer {
+  position: absolute;
+  left: 0; /* Hidden to the left initially */
+  bottom: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.813);
+  transition: all 0.4s ease-in-out; /* Adjust timing to make it smoother */
+  opacity: 1; /* Initially hidden */
+}
+
+.mobileNavContainer.open {
+  left: 0; /* Slide in from the left */
+  opacity: 1; /* Fully visible */
+}
+
+.mobileNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileNav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.mobileBackBtn {
+  font-size: 5rem;
+  padding: 1rem 1rem;
+  animation: arrow 2s ease-in-out 0.5s infinite;
+}
+
+@keyframes arrow {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: 100px;
+  }
+}
+
 @media screen and (max-width: 640px) {
   .nav ul {
     display: none;
@@ -44,5 +92,8 @@ a.ctaLink:visited {
   .menu {
     display: block;
     font-size: 2.6rem;
+  }
+  .mobileNav ul {
+    display: flex;
   }
 }
