@@ -82,3 +82,9 @@ input:focus {
     "description": "Import CSS Module as `styles`"
   },
 */
+
+@media screen and (max-width: 640px) {
+  label {
+    font-size: 1.2rem;
+  }
+}

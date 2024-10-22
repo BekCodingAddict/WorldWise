@@ -11,7 +11,7 @@
 
 @media screen and (max-width: 640px) {
   .logo {
-    height: 5dvh;
+    height: 3dvh;
     max-width: 100%;
   }
 }

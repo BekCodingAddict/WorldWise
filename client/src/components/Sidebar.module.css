@@ -32,12 +32,25 @@
 }
 
 .devider {
-  /* display: none; */
+  display: none;
   position: absolute;
   bottom: 0;
 }
 
-.devider .doubleLine {
+.devider:hover {
+  color: var(--color-brand--2);
+}
+
+.deviderVertical {
+  position: absolute;
+  right: 0;
+  top: 50dvh;
+}
+
+.deviderVertical:hover {
+  color: var(--color-brand--2);
+}
+.doubleLine {
   padding: 0.5rem 0.5rem;
   font-size: 3rem;
   cursor: pointer;
@@ -56,5 +69,8 @@
 
   .devider {
     display: block;
+  }
+  .deviderVertical {
+    display: none;
   }
 }

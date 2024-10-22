@@ -18,6 +18,7 @@
 .buttons {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .flag {
@@ -41,4 +42,20 @@
 :global(.react-datepicker) {
   font-family: inherit;
   font-size: 1.2rem;
+}
+@media screen and (max-width: 1024px) {
+  .form {
+    width: 40dvh;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .form {
+    padding: 1.8rem 2.5rem;
+    gap: 1rem;
+  }
+
+  .flag {
+    font-size: 2.3rem;
+  }
 }

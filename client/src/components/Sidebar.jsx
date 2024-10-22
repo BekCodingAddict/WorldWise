@@ -4,10 +4,11 @@ import AppNav from "./AppNav";
 import { Outlet } from "react-router-dom";
 import { FaGripLines } from "react-icons/fa";
 import { useRef, useState } from "react";
+import { FaGripLinesVertical } from "react-icons/fa6";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [dimension, setDimension] = useState({ height: 540 });
+  const [dimension, setDimension] = useState({ width: 640, height: 540 });
 
   const resizeableRef = useRef(null);
   const isResizeing = useRef(false);
@@ -16,17 +17,22 @@ function Sidebar() {
     e.preventDefault();
 
     isResizeing.current = true;
+    const startX = e.type === "mousedown" ? e.clientX : e.touches[0].clientX;
     const startY = e.type === "mousedown" ? e.clientY : e.touches[0].clientY;
 
-    const { height } = resizeableRef.current.getBoundingClientRect();
+    const { width, height } = resizeableRef.current.getBoundingClientRect();
 
     const handleMouseMove = (e) => {
       if (isResizeing.current) {
         const currentY =
           e.type === "mousemove" ? e.clientY : e.touches[0].clientY;
+        const currentX =
+          e.type === "mousemove" ? e.clientX : e.touches[0].clientX;
+        const newWidth = width + (currentX - startX);
         const newHeight = height + (currentY - startY);
 
         setDimension({
+          width: newWidth > 100 ? newWidth : 100, // minimum size
           height: newHeight > 100 ? newHeight : 100, // minimum size
         });
       }
@@ -50,7 +56,14 @@ function Sidebar() {
     <div
       className={styles.sidebar}
       ref={resizeableRef}
-      style={{ height: `${dimension.height}px` }}
+      style={{
+        height: `${
+          window.innerWidth > 1024 ? window.innerHeight : dimension.height
+        }px`,
+        width: `${
+          window.innerWidth < 1024 ? window.innerWidth : dimension.width
+        }px`,
+      }}
     >
       <Logo className={"position"} />
       <AppNav />
@@ -63,6 +76,13 @@ function Sidebar() {
       </footer>
       <div className={styles.devider}>
         <FaGripLines
+          className={styles.doubleLine}
+          onMouseDown={startResize}
+          onTouchStart={startResize}
+        />
+      </div>
+      <div className={styles.deviderVertical}>
+        <FaGripLinesVertical
           className={styles.doubleLine}
           onMouseDown={startResize}
           onTouchStart={startResize}
