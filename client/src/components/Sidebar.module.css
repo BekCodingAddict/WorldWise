@@ -32,7 +32,7 @@
 }
 
 .devider {
-  display: none;
+  /* display: none; */
   position: absolute;
   bottom: 0;
 }
@@ -40,12 +40,14 @@
 .devider .doubleLine {
   padding: 0.5rem 0.5rem;
   font-size: 3rem;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
   .sidebar {
-    height: 50vh;
+    height: auto;
     padding: 1rem 2rem 1rem 1rem;
+    min-height: 20dvh;
   }
 
   .footer {

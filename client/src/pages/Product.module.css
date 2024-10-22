@@ -14,7 +14,7 @@
   align-items: center;
 }
 
-.product > img {
+.product section > img {
   width: 100%;
 }
 
@@ -60,8 +60,9 @@
     grid-template-columns: 1fr;
   }
 
-  .product > img {
-    max-width: 40rem;
+  .product section > img {
+    height: auto;
+    max-width: 100%;
     gap: 5rem;
   }
 }
