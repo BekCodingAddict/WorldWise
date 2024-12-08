@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useReducer,
+  useState,
 } from "react";
 
 const BASE_URL = "http://localhost:9000";
@@ -67,7 +68,7 @@ function CitiesProvider({ children }) {
     reducer,
     initialState
   );
-
+  const [showMap, setShowMap] = useState(true);
   // const [cities, setCities] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   // const [currentCity, setCurrentCity] = useState({});
@@ -152,6 +153,8 @@ function CitiesProvider({ children }) {
         getCity,
         deleteCity,
         error,
+        showMap,
+        setShowMap,
       }}
     >
       {children}
