@@ -40,7 +40,7 @@ const Pricing = lazy(() => import("./pages/Pricing"));
 const AppLayout = lazy(() => import("./pages/AppLayout"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
-const PageNotFound = lazy(() => import("./pages/pageNotFound"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
