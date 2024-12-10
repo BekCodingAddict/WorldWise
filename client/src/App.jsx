@@ -16,7 +16,7 @@ const Pricing = lazy(() => import("./pages/Pricing"));
 const AppLayout = lazy(() => import("./pages/AppLayout"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
-const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const PageIsNotFound = lazy(() => import("./pages/PageNotFound"));
 
 function App() {
   return (
@@ -47,7 +47,7 @@ function App() {
                 <Route path="form" element={<Form />} />
                 <Route path="map" element={<Map />} />
               </Route>
-              <Route path="*" element={<PageNotFound />} />
+              <Route path="*" element={<PageIsNotFound />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
