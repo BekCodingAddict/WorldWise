@@ -9,7 +9,6 @@ import CountryList from "./components/CountryList";
 import City from "./components/City";
 import Form from "./components/Form";
 import Map from "./components/Map";
-// import PageNotFound from "./pages/PageNotFound.jsx";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Product = lazy(() => import("./pages/Product"));
@@ -17,6 +16,7 @@ const Pricing = lazy(() => import("./pages/Pricing"));
 const AppLayout = lazy(() => import("./pages/AppLayout"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 function App() {
   return (
@@ -47,7 +47,7 @@ function App() {
                 <Route path="form" element={<Form />} />
                 <Route path="map" element={<Map />} />
               </Route>
-              {/* <Route path="*" element={<PageNotFound />} /> */}
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
