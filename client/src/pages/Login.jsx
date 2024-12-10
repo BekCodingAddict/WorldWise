@@ -4,7 +4,7 @@ import PageNav from "../components/PageNav";
 import { useAuth } from "../contexts/FakeAuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
-
+import { toast, ToastContainer } from "react-toastify";
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState("jack@example.com");
@@ -55,6 +55,7 @@ export default function Login() {
         <div>
           <Button type={"primary"}>Login</Button>
         </div>
+        <ToastContainer />
       </form>
     </main>
   );
