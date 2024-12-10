@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useReducer,
+  useRef,
   useState,
 } from "react";
 
@@ -16,6 +17,7 @@ const initialState = {
   isLoading: false,
   currentCity: {},
   error: "",
+  isLaptop: false,
 };
 
 const reducer = (state, action) => {
@@ -58,6 +60,7 @@ const reducer = (state, action) => {
         isLoading: false,
         error: action.payload,
       };
+
     default:
       throw new Error("Unknown action type!");
   }
@@ -69,6 +72,24 @@ function CitiesProvider({ children }) {
     initialState
   );
   const [showMap, setShowMap] = useState(true);
+
+  const resizeableRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setShowMap(true);
+      } else {
+        setShowMap(false);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setShowMap]);
   // const [cities, setCities] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   // const [currentCity, setCurrentCity] = useState({});
@@ -155,6 +176,7 @@ function CitiesProvider({ children }) {
         error,
         showMap,
         setShowMap,
+        resizeableRef,
       }}
     >
       {children}

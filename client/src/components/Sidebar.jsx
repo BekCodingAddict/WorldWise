@@ -8,22 +8,7 @@ import Logo from "./Logo";
 import styles from "./Sidebar.module.css";
 
 function Sidebar() {
-  const { showMap, setShowMap } = useCities();
-
-  const resizeableRef = useRef(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1024) setShowMap(true);
-      else setShowMap(false);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [setShowMap]);
+  const { showMap, setShowMap, resizeableRef, isLaptop } = useCities();
 
   return (
     <div

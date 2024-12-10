@@ -1,13 +1,15 @@
 .form {
+  box-sizing: border-box;
   background-color: var(--color-dark--2);
   border-radius: 7px;
   padding: 2rem 3rem;
-  width: 100%;
+  width: calc(90%);
   display: flex;
   flex-direction: column;
   gap: 2rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
   position: absolute;
 
   top: 50%;
@@ -51,11 +53,8 @@
   font-family: inherit;
   font-size: 1.2rem;
 }
-@media screen and (max-width: 1024px) {
-  .form {
-    width: 40dvh;
-  }
-}
+/* @media screen and (max-width: 1024px) {
+} */
 
 @media screen and (max-width: 640px) {
   .form {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Form from "./Form";
 import {
   MapContainer,
   Marker,
@@ -8,7 +7,7 @@ import {
   useMap,
   useMapEvent,
 } from "react-leaflet";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useCities } from "../contexts/CityContext";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
@@ -18,7 +17,7 @@ import Button from "./Button";
 
 function Map() {
   const [mapPosition, setMapPosition] = useState([40, 0]);
-  const { cities, showMap } = useCities();
+  const { cities, showMap, isLaptop } = useCities();
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
@@ -42,7 +41,7 @@ function Map() {
           {isLoadingPosition ? "Loading..." : "Use Your Position"}
         </Button>
       )}
-      {/* <Form /> */}
+
       <MapContainer
         center={mapPosition}
         zoom={8}

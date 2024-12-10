@@ -39,6 +39,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
+                {/* <Route index element={<Navigate to="cities" replace />} /> */}
                 <Route index element={<Navigate to="cities" replace />} />
                 <Route path="cities" element={<CityList />} />
 
