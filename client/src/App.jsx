@@ -37,6 +37,7 @@ function App() {
                   <ProtectedRoute>
                     <AppLayout />
                   </ProtectedRoute>
+                  // <AppLayout />
                 }
               >
                 {/* <Route index element={<Navigate to="cities" replace />} /> */}

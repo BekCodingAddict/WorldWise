@@ -53,8 +53,11 @@
   font-family: inherit;
   font-size: 1.2rem;
 }
-/* @media screen and (max-width: 1024px) {
-} */
+@media screen and (max-width: 1024px) {
+  .form {
+    max-width: 60rem;
+  }
+}
 
 @media screen and (max-width: 640px) {
   .form {

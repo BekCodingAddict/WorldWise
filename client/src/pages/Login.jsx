@@ -5,35 +5,48 @@ import { useAuth } from "../contexts/FakeAuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 export default function Login() {
-  // PRE-FILL FOR DEV PURPOSES
-  const [email, setEmail] = useState("jack@example.com");
-  const [password, setPassword] = useState("qwerty");
-  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const { login, user } = useAuth();
 
-  useEffect(() => {
-    if (isAuthenticated) navigate("/app", { replace: true });
-  }, [isAuthenticated, navigate]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email && password) {
-      login(email, password);
+    try {
+      const formData = new FormData(e.target);
+      const userData = {
+        email: formData.get("email"),
+        password: formData.get("password"),
+      };
+
+      const response = await axios.post("/api/users/login", userData);
+      if (response.data.success) {
+        toast.success(response.data.message);
+        localStorage.setItem("token", response.data.data);
+        login(user);
+        setTimeout(navigate("/app", { replace: true }), 2000);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/app");
+    }
+  }, [navigate]);
+
   return (
     <main className={styles.login}>
       <PageNav />
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
+          <input type="email" id="email" name="email" placeholder="Email" />
         </div>
 
         <div className={styles.row}>
@@ -41,8 +54,8 @@ export default function Login() {
           <input
             type="password"
             id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
+            name="password"
+            placeholder="Password"
           />
         </div>
         <p className={styles.text}>
@@ -55,8 +68,8 @@ export default function Login() {
         <div>
           <Button type={"primary"}>Login</Button>
         </div>
-        <ToastContainer />
       </form>
+      <ToastContainer />
     </main>
   );
 }

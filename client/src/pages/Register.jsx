@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
 function Register() {
   const navigate = useNavigate();
@@ -20,9 +21,7 @@ function Register() {
       const response = await axios.post("/api/users/register", userData);
       if (response.data.success) {
         e.target.reset();
-
         toast.success(response.data.message);
-
         setTimeout(() => navigate("/login"), 2000);
       } else {
         toast.error(response.data.message);
@@ -31,6 +30,12 @@ function Register() {
       toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/app");
+    }
+  }, [navigate]);
 
   return (
     <main className={styles.login}>
