@@ -17,12 +17,13 @@ import Button from "./Button";
 
 function Map() {
   const [mapPosition, setMapPosition] = useState([40, 0]);
-  const { cities, showMap, isLaptop } = useCities();
+  const { cities, showMap } = useCities();
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
     getPosition,
   } = useGeolocation();
+
   const [mapLat, mapLng] = useUrlPosition();
 
   useEffect(() => {
@@ -89,7 +90,7 @@ function DetectClick() {
   const navigate = useNavigate();
 
   useMapEvent({
-    click: (e) => navigate(`form`), //?lat=${e.latlng.lat}&lng=${e.latlng.lng}
+    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`), //?lat=${e.latlng.lat}&lng=${e.latlng.lng}
   });
 }
 

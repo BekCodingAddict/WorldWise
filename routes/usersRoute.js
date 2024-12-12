@@ -3,6 +3,7 @@ const User = require("../modules/usersModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authMiddleware = require("../middlewares/authMiddleware");
+const axios = require("axios");
 
 //Register new user
 router.post("/register", async (req, res) => {
@@ -100,5 +101,72 @@ router.post("/get-user-by-id", authMiddleware, async (req, res) => {
       data: null,
     });
   }
+});
+
+//Adding Cities Lists
+router.post("/add-city", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    if (!user) {
+      return res.status(404).send({
+        message: "User not found",
+        success: false,
+        data: null,
+      });
+    }
+
+    user.cities.push(req.body);
+    await user.save();
+
+    res.status(200).send({
+      message: "New City has added successfully!",
+      success: true,
+      data: user.cities,
+    });
+  } catch (error) {
+    res.send({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+});
+
+//Reverse Geocode API route
+router.post("/reverse-geocode", async (req, res) => {
+  const BASE_URL = `https://us1.locationiq.com/v1/reverse`;
+  const { lat, lng } = req.body;
+
+  try {
+    if (!lat || !lng) {
+      return res.status(400).send({
+        message: "Latitude and longitude are required!",
+        success: false,
+        data: null,
+      });
+    }
+    const API_URL = `${BASE_URL}?lat=${lat}&lon=${lng}&format=json&key=${process.env.GEOCODING_API_KEY}`;
+    // Send request to the geocode API
+    const response = await axios.get(API_URL);
+    res.status(200).send({
+      message: "Reversing Geocode successfully finished!",
+      success: true,
+      data: response.data,
+    });
+  } catch (error) {
+    res.status(500).send({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+});
+
+// Get Cities
+router.post("/get-cities", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    res.send(user);
+  } catch (error) {}
 });
 module.exports = router;

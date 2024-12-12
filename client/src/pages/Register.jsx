@@ -9,6 +9,7 @@ import { useEffect } from "react";
 
 function Register() {
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -19,7 +20,9 @@ function Register() {
         password: formData.get("password"),
       };
       const response = await axios.post("/api/users/register", userData);
+
       if (response.data.success) {
+        console.log(response.data.data);
         e.target.reset();
         toast.success(response.data.message);
         setTimeout(() => navigate("/login"), 2000);

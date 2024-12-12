@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   createContext,
   useCallback,
@@ -98,7 +99,16 @@ function CitiesProvider({ children }) {
     const fetchCities = async () => {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL}/cities`);
+        const res = await axios.post(
+          "/api/users/get-cities",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        // const res = await fetch(`${BASE_URL}/cities`);
         const data = await res.json();
         dispatch({ type: "cities/loaded", payload: data });
       } catch {
