@@ -48,3 +48,10 @@
 3.Additional Features:
 - Add advanced filtering options for trips (e.g., by year, country, or type of travel).
 - Include analytics, such as trends in travel behavior or heatmaps of visited locations.
+
+## Version on the branches:
+1. <code>feature/v-1.0.0:
+   - Version 1 is included all of informations explained below except the back-end part. In this branch I did personal contribution that is Responsive Design.
+     
+3. <code>feature/v-2.0.0:
+   - In this version 2  I'm started to Integrate Back-end part.
