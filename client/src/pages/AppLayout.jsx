@@ -2,6 +2,7 @@ import Sidebar from "../components/Sidebar";
 import styles from "./AppLayout.module.css";
 import Map from "../components/Map";
 import User from "../components/User";
+import { useSelector } from "react-redux";
 
 function AppLayout() {
   return (

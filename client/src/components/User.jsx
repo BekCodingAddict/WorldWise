@@ -1,12 +1,15 @@
-import { useAuth } from "../contexts/FakeAuthContext";
-import styles from "./User.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/userSlice";
+import styles from "./User.module.css";
 
 function User() {
-  const { user, logout } = useAuth();
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   function handleClick() {
-    logout();
+    dispatch(logout());
     navigate("/");
   }
 

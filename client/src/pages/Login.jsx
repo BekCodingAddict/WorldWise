@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import styles from "./Login.module.css";
-import PageNav from "../components/PageNav";
-import { useAuth } from "../contexts/FakeAuthContext";
+import axios from "axios";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import Button from "../components/Button";
+import PageNav from "../components/PageNav";
+import styles from "./Login.module.css";
+
 export default function Login() {
   const navigate = useNavigate();
-  const { login, user } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +23,6 @@ export default function Login() {
       if (response.data.success) {
         toast.success(response.data.message);
         localStorage.setItem("token", response.data.data);
-        login(user);
         setTimeout(navigate("/app", { replace: true }), 2000);
       } else {
         toast.error(response.data.message);

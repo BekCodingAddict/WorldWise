@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "../contexts/FakeAuthContext";
+import { SetUser } from "../redux/userSlice";
 
 function ProtectedRoute({ children }) {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const { setUser, user } = useAuth();
 
   useEffect(() => {
     const validateToken = async () => {
@@ -23,7 +24,7 @@ function ProtectedRoute({ children }) {
         );
 
         if (response.data.success) {
-          setUser(response.data.data);
+          dispatch(SetUser(response.data.data));
           setLoading(false);
         } else {
           setLoading(false);
@@ -44,7 +45,7 @@ function ProtectedRoute({ children }) {
     } else {
       setTimeout(navigate("/login"), 1500);
     }
-  }, [navigate]);
+  }, [navigate, dispatch]);
 
   return <div>{loading ? <div>Loading...</div> : <>{children}</>}</div>;
 }
