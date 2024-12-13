@@ -15,6 +15,7 @@ import { useCities } from "../contexts/CityContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useAddCity } from "../hooks/useAddCity";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -37,6 +38,7 @@ function Form() {
   const [isLoadingGeoCoding, setIsLoadingGeoCoding] = useState(false);
   const [emoji, setEmoji] = useState("");
   const [geoCodingError, setGeoCodingError] = useState("");
+  const { addCity, isAdding } = useAddCity();
 
   useEffect(
     function () {
@@ -88,19 +90,7 @@ function Form() {
         notes,
         position: { lat, lng },
       };
-
-      const response = await axios.post("/api/users/add-city", newCity, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      if (response.data.success) {
-        e.target.reset();
-        toast.success(response.data.message);
-        setTimeout(() => navigate("/app"), 1500);
-      } else {
-        toast.error(response.data.message);
-      }
+      addCity(newCity);
     } catch (error) {
       toast.error(error.message);
     }

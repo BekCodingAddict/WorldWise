@@ -9,6 +9,8 @@ import SpinnerFullPage from "./components/SpinnerFullPage";
 import { CitiesProvider } from "./contexts/CityContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Product = lazy(() => import("./pages/Product"));
@@ -62,6 +64,7 @@ function App() {
           </Suspense>
         </BrowserRouter>
       </CitiesProvider>
+      <ToastContainer />
     </QueryClientProvider>
   );
 }

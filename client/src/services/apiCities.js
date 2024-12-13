@@ -18,7 +18,19 @@ export const getCities = async () => {
   }
 };
 
-export const createCities = () => {};
+export const addCity = async (newCity) => {
+  try {
+    const { data } = await axios.post("/api/users/add-city", newCity, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    throw new Error("addCity:" + error.message);
+  }
+};
 
 export const deleteCity2 = async (cityId) => {
   try {
@@ -31,6 +43,7 @@ export const deleteCity2 = async (cityId) => {
         },
       }
     );
+    return data;
   } catch (error) {
     console.log(error.message);
     throw new Error("deleteCity:" + error.message);
