@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useCities2 } from "../hooks/useCities";
 
 const BASE_URL = "http://localhost:9000";
 
@@ -80,8 +81,6 @@ function CitiesProvider({ children }) {
     const handleResize = () => {
       if (window.innerWidth > 1024) {
         setShowMap(true);
-      } else {
-        setShowMap(false);
       }
     };
     handleResize();
@@ -91,9 +90,6 @@ function CitiesProvider({ children }) {
       window.removeEventListener("resize", handleResize);
     };
   }, [setShowMap]);
-  // const [cities, setCities] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [currentCity, setCurrentCity] = useState({});
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -108,8 +104,7 @@ function CitiesProvider({ children }) {
             },
           }
         );
-        // const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
+        const data = await res.data.cities;
         dispatch({ type: "cities/loaded", payload: data });
       } catch {
         dispatch({

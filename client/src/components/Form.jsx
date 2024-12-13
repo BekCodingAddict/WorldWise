@@ -50,11 +50,12 @@ function Form() {
             lng,
           });
           const data = response.data.data;
+
           if (!data.address.country_code)
             throw new Error(
               "That does not seem to be a city. Click somewhere else!"
             );
-          setCityName(data.address.state || "");
+          setCityName(data.address.city || "");
           setCountry(data.address.country);
           setEmoji(convertToEmoji(data.address.country_code));
         } catch (error) {
@@ -87,7 +88,6 @@ function Form() {
         notes,
         position: { lat, lng },
       };
-      console.log(newCity);
 
       const response = await axios.post("/api/users/add-city", newCity, {
         headers: {

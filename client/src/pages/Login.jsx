@@ -44,7 +44,13 @@ export default function Login() {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
-          <input type="email" id="email" name="email" placeholder="Email" />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            defaultValue={"john@gmail.com"}
+          />
         </div>
 
         <div className={styles.row}>
@@ -54,6 +60,7 @@ export default function Login() {
             id="password"
             name="password"
             placeholder="Password"
+            defaultValue={"1234"}
           />
         </div>
         <p className={styles.text}>

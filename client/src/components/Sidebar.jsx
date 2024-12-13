@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { FaGripLines } from "react-icons/fa";
 import { FaGripLinesVertical } from "react-icons/fa6";
 import { Outlet } from "react-router-dom";
@@ -8,7 +7,7 @@ import Logo from "./Logo";
 import styles from "./Sidebar.module.css";
 
 function Sidebar() {
-  const { showMap, setShowMap, resizeableRef, isLaptop } = useCities();
+  const { showMap, setShowMap, resizeableRef } = useCities();
 
   return (
     <div

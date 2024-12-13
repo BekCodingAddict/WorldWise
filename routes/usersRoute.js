@@ -167,6 +167,42 @@ router.post("/get-cities", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.body.userId);
     res.send(user);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+});
+
+//delete Cities
+router.post("/delete-city", authMiddleware, async (req, res) => {
+  console.log(req.body);
+  try {
+    const result = await User.updateOne(
+      { _id: req.body.userId },
+      { $pull: { cities: { _id: req.body.cityId } } }
+    );
+    if (result.modifiedCount > 0) {
+      res.status(200).send({
+        message: "City removed successfully!",
+        success: true,
+        data: null,
+      });
+    } else {
+      res.status(404).send({
+        message: "City not found or already removed!",
+        success: false,
+        data: null,
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
 });
 module.exports = router;
