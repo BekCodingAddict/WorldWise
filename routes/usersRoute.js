@@ -148,6 +148,13 @@ router.post("/reverse-geocode", async (req, res) => {
     const API_URL = `${BASE_URL}?lat=${lat}&lon=${lng}&format=json&key=${process.env.GEOCODING_API_KEY}`;
     // Send request to the geocode API
     const response = await axios.get(API_URL);
+    if (!response) {
+      return res.status(400).send({
+        message: "That does not seem to be a city!",
+        success: false,
+        data: null,
+      });
+    }
     res.status(200).send({
       message: "Reversing Geocode successfully finished!",
       success: true,
@@ -178,7 +185,6 @@ router.post("/get-cities", authMiddleware, async (req, res) => {
 
 //delete Cities
 router.post("/delete-city", authMiddleware, async (req, res) => {
-  console.log(req.body);
   try {
     const result = await User.updateOne(
       { _id: req.body.userId },
@@ -197,6 +203,30 @@ router.post("/delete-city", authMiddleware, async (req, res) => {
         data: null,
       });
     }
+  } catch (error) {
+    res.status(500).send({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+});
+
+//Geting one spesific city
+router.post("/get-city-by-id", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    const city = user.cities.find(
+      (city) => city._id.toString() === req.body.cityId
+    );
+    if (!city) {
+      return res.status(404).send({
+        message: "City not found!",
+        success: false,
+        data: null,
+      });
+    }
+    res.status(200).json(city);
   } catch (error) {
     res.status(500).send({
       message: error.message,

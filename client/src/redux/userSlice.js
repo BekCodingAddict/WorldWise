@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const userSlice = createSlice({
   name: "users",
@@ -17,6 +18,7 @@ const userSlice = createSlice({
     logout: (state) => {
       state.user = null;
       localStorage.removeItem("token");
+      toast.success("Logget out!", { autoClose: 1500 });
     },
   },
 });

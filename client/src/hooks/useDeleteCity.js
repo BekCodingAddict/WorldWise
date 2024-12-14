@@ -7,7 +7,7 @@ export function useDeleteCity() {
   const { isLoading: isDeleting, mutate: deleteCity } = useMutation({
     mutationFn: (cityId) => deleteCityAPI(cityId),
     onSuccess: () => {
-      toast.success("City deleted successfuly!");
+      toast.success("City deleted successfuly!", { autoClose: 1500 });
       queryClient.invalidateQueries({
         queryKey: ["cities"],
       });

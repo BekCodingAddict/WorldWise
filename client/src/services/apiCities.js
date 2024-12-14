@@ -18,6 +18,24 @@ export const getCities = async () => {
   }
 };
 
+export const getCity = async (cityId) => {
+  try {
+    const { data } = await axios.post(
+      "/api/users/get-city-by-id",
+      { cityId },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error.message);
+    throw new Error("getCity:" + error.message);
+  }
+};
+
 export const addCity = async (newCity) => {
   try {
     const { data } = await axios.post("/api/users/add-city", newCity, {
@@ -48,4 +66,17 @@ export const deleteCity2 = async (cityId) => {
     console.log(error.message);
     throw new Error("deleteCity:" + error.message);
   }
+};
+
+export const reverseGeocode = async ({ lat, lng }) => {
+  const response = await axios.post("/api/users/reverse-geocode", {
+    lat,
+    lng,
+  });
+  if (!response) {
+    console.log("Could not found city!");
+    return { error: { message: "Could not found the city!" } };
+  }
+
+  return response.data.data;
 };

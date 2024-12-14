@@ -2,20 +2,20 @@
 
 import { useEffect, useState } from "react";
 
-import styles from "./Form.module.css";
-import Button from "./Button";
-import { useNavigate } from "react-router-dom";
-import BackButton from "./BackButton";
-import { useUrlPosition } from "../hooks/useUrlPosition";
-import Message from "../components/Message";
-import Spinner from "../components/Spinner";
+import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useCities } from "../contexts/CityContext";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import Message from "../components/Message";
+import Spinner from "../components/Spinner";
+import { useCities } from "../contexts/CityContext";
 import { useAddCity } from "../hooks/useAddCity";
+import { useUrlPosition } from "../hooks/useUrlPosition";
+import BackButton from "./BackButton";
+import Button from "./Button";
+import styles from "./Form.module.css";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -24,8 +24,6 @@ export function convertToEmoji(countryCode) {
     .map((char) => 127397 + char.charCodeAt());
   return String.fromCodePoint(...codePoints);
 }
-
-const BASE_URL = `https://us1.locationiq.com/v1/reverse`;
 
 function Form() {
   const { createCity, isLoading } = useCities();
@@ -57,11 +55,14 @@ function Form() {
             throw new Error(
               "That does not seem to be a city. Click somewhere else!"
             );
+
           setCityName(data.address.city || "");
           setCountry(data.address.country);
           setEmoji(convertToEmoji(data.address.country_code));
         } catch (error) {
-          setGeoCodingError(error.message);
+          setGeoCodingError(
+            "That does not seem to be a city. Click somewhere else!"
+          );
         } finally {
           setIsLoadingGeoCoding(false);
         }

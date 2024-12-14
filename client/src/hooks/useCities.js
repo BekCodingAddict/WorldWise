@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCities } from "../services/apiCities";
 
-export function useCities2() {
+export function useCities() {
   const {
     isLoading,
     data = {},
@@ -11,7 +11,6 @@ export function useCities2() {
     queryFn: getCities,
     refetchOnMount: true,
   });
-  console.log(data);
 
   return { isLoading, error, data };
 }

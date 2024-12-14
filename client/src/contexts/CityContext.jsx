@@ -8,7 +8,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { useCities2 } from "../hooks/useCities";
 
 const BASE_URL = "http://localhost:9000";
 

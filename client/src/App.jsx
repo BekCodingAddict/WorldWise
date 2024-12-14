@@ -62,9 +62,9 @@ function App() {
               <Route path="*" element={<PageIsNotFound />} />
             </Routes>
           </Suspense>
+          <ToastContainer />
         </BrowserRouter>
       </CitiesProvider>
-      <ToastContainer />
     </QueryClientProvider>
   );
 }

@@ -4,6 +4,8 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { useCities } from "../contexts/CityContext";
 import Spinner from "./Spinner";
 import BackButton from "./BackButton";
+import { useCity } from "../hooks/useCity";
+import { useSelector } from "react-redux";
 
 // eslint-disable-next-line
 const formatDate = (date) =>
@@ -16,11 +18,9 @@ const formatDate = (date) =>
 
 function City() {
   const { id } = useParams();
-  const { getCity, currentCity, isLoading } = useCities();
-
-  useEffect(() => {
-    getCity(id);
-  }, [id, getCity]);
+  // const { getCity, currentCity, isLoading } = useCities();
+  const { currentCity } = useSelector((state) => state.currentCity);
+  const { city, isLoading } = useCity();
 
   const { cityName, emoji, date, notes } = currentCity;
 

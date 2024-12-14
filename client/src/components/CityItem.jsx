@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useCities } from "../contexts/CityContext";
 import styles from "./CityItem.module.css";
 import { useDeleteCity } from "../hooks/useDeleteCity";
+import { useSelector } from "react-redux";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -12,13 +13,12 @@ const formatDate = (date) =>
 
 function CityItem({ city }) {
   const { cityName, emoji, date, _id, position } = city;
-  const { currentCity, deleteCity } = useCities();
-  const { deleteCity: deleteCityAPI } = useDeleteCity();
+  const { currentCity } = useSelector((state) => state.currentCity);
+  const { deleteCity } = useDeleteCity();
 
   const handleClick = (e) => {
     e.preventDefault();
-    deleteCity(_id);
-    deleteCityAPI(_id);
+    if (confirm("Are you sure about delete this city?")) deleteCity(_id);
   };
 
   return (

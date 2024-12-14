@@ -21,9 +21,9 @@ export default function Login() {
 
       const response = await axios.post("/api/users/login", userData);
       if (response.data.success) {
-        toast.success(response.data.message);
+        toast.success(response.data.message, { autoClose: 1500 });
         localStorage.setItem("token", response.data.data);
-        setTimeout(navigate("/app", { replace: true }), 2000);
+        navigate("/app", { replace: true });
       } else {
         toast.error(response.data.message);
       }
@@ -74,7 +74,6 @@ export default function Login() {
           <Button type={"primary"}>Login</Button>
         </div>
       </form>
-      <ToastContainer />
     </main>
   );
 }

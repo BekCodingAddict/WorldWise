@@ -7,17 +7,25 @@ import {
   useMap,
   useMapEvent,
 } from "react-leaflet";
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
-import { useCities } from "../contexts/CityContext";
+import { useNavigate } from "react-router-dom";
+
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import { useCities } from "../hooks/useCities";
 import styles from "./Map.module.css";
 
 import Button from "./Button";
+import { reverseGeocode } from "../services/apiCities";
 
 function Map() {
+  const navigate = useNavigate();
   const [mapPosition, setMapPosition] = useState([40, 0]);
-  const { cities, showMap } = useCities();
+  const [myCurrentPosition, setMyCurrentPosition] = useState({});
+  const { data } = useCities();
+  const { cities } = data;
+
+  const showMap = true;
+
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
@@ -31,13 +39,21 @@ function Map() {
   }, [mapLat, mapLng]);
 
   useEffect(() => {
-    if (geolocationPosition)
-      setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
-  }, [geolocationPosition]);
+    const isPositionExist = async () => {
+      if (geolocationPosition) {
+        const { address } = await reverseGeocode(geolocationPosition);
+        setMyCurrentPosition(address);
+        setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+
+        return address;
+      }
+    };
+    isPositionExist();
+  }, [geolocationPosition, setMyCurrentPosition, navigate]);
 
   return (
     <div className={styles.mapContainer}>
-      {!geolocationPosition && !showMap && (
+      {!geolocationPosition && (
         <Button type="position" onClick={getPosition}>
           {isLoadingPosition ? "Loading..." : "Use Your Position"}
         </Button>
@@ -53,7 +69,7 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
-        {cities.map((city) => (
+        {cities?.map((city) => (
           <Marker
             position={[city.position.lat, city.position.lng]}
             key={`${city.position.lat}+${city.position.lng}`}
@@ -68,8 +84,8 @@ function Map() {
         {geolocationPosition && (
           <Marker position={geolocationPosition}>
             <Popup>
-              <span>Emoji</span>
-              <span>City Name</span>
+              <span>{myCurrentPosition?.country_code?.toUpperCase()}</span>
+              <span>{myCurrentPosition?.city}</span>
             </Popup>
           </Marker>
         )}
