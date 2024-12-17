@@ -5,12 +5,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Message from "../components/Message";
 import Spinner from "../components/Spinner";
-import { useCities } from "../contexts/CityContext";
+
 import { useAddCity } from "../hooks/useAddCity";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import BackButton from "./BackButton";
@@ -26,8 +25,6 @@ export function convertToEmoji(countryCode) {
 }
 
 function Form() {
-  const { createCity, isLoading } = useCities();
-  const navigate = useNavigate();
   const [lat, lng] = useUrlPosition();
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
@@ -98,9 +95,8 @@ function Form() {
   }
   return (
     <>
-      <ToastContainer />
       <form
-        className={`${styles.form} ${isLoading ? styles.loading : ""}`}
+        className={`${styles.form} ${isAdding ? styles.loading : ""}`}
         onSubmit={handleSubmit}
       >
         <div className={styles.row}>

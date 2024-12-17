@@ -1,11 +1,9 @@
-import styles from "./City.module.css";
-import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import { useCities } from "../contexts/CityContext";
-import Spinner from "./Spinner";
-import BackButton from "./BackButton";
-import { useCity } from "../hooks/useCity";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useCity } from "../hooks/useCity";
+import BackButton from "./BackButton";
+import styles from "./City.module.css";
+import Spinner from "./Spinner";
 
 // eslint-disable-next-line
 const formatDate = (date) =>

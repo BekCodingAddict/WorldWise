@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
-import { useCities } from "../contexts/CityContext";
-import styles from "./CityItem.module.css";
-import { useDeleteCity } from "../hooks/useDeleteCity";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDeleteCity } from "../hooks/useDeleteCity";
+import styles from "./CityItem.module.css";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
