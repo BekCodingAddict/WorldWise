@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), eslint()],
   server: {
     proxy: {
-      "/api": "http://localhost:10000",
+      "/api": "http://localhost:10001",
     },
   },
 });
