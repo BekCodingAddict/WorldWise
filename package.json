@@ -4,8 +4,8 @@
   "description": "Worldwise Travel Tracking is a travel management platform that provides organizations and individuals with tools to track travel itineraries and ensure traveler safety.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "build": "npm install --prefix ./client && npm run build --prefix ./client && npm install"
   },
   "author": "",
   "license": "ISC",
