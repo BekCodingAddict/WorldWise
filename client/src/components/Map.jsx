@@ -7,15 +7,15 @@ import {
   useMap,
   useMapEvent,
 } from "react-leaflet";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
+import { useCities } from "../hooks/useCities";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
-import { useCities } from "../hooks/useCities";
 import styles from "./Map.module.css";
 
-import Button from "./Button";
 import { reverseGeocode } from "../services/apiCities";
+import Button from "./Button";
 
 function Map() {
   const navigate = useNavigate();
@@ -23,8 +23,7 @@ function Map() {
   const [myCurrentPosition, setMyCurrentPosition] = useState({});
   const { data } = useCities();
   const { cities } = data;
-
-  const showMap = true;
+  const location = useLocation();
 
   const {
     isLoading: isLoadingPosition,
@@ -58,7 +57,7 @@ function Map() {
           {isLoadingPosition ? "Loading..." : "Use Your Position"}
         </Button>
       )}
-
+      {location.pathname === "/app/form" && <Outlet />}
       <MapContainer
         center={mapPosition}
         zoom={8}

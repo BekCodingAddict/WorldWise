@@ -47,14 +47,11 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              {/* <Route index element={<Navigate to="cities" replace />} /> */}
               <Route index element={<Navigate to="cities" replace />} />
-              <Route path="cities" element={<CityList />} />
-
+              <Route path={"cities"} element={<CityList />} />
               <Route path="cities/:id" element={<City />} />
               <Route path="countries" element={<CountryList />} />
               <Route path="form" element={<Form />} />
-              <Route path="map" element={<Map />} />
             </Route>
             <Route path="*" element={<PageIsNotFound />} />
           </Routes>

@@ -2,15 +2,18 @@ import { useEffect } from "react";
 import { FaGripLines } from "react-icons/fa";
 import { FaGripLinesVertical } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { setIsSidebarOpen } from "../redux/sidebarSlice";
 import AppNav from "./AppNav";
 import Logo from "./Logo";
 import styles from "./Sidebar.module.css";
+import CityList from "./CityList";
 
 function Sidebar() {
   const { isSideBarOpen } = useSelector((state) => state.sidebar);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,7 +38,8 @@ function Sidebar() {
       {isSideBarOpen && (
         <>
           <AppNav />
-          <Outlet />
+
+          {location.pathname !== "/app/form" ? <Outlet /> : <CityList />}
         </>
       )}
       <footer className={styles.footer}>
@@ -46,7 +50,10 @@ function Sidebar() {
       <div className={styles.devider}>
         <FaGripLines
           className={styles.doubleLine}
-          onClick={() => dispatch(setIsSidebarOpen(!isSideBarOpen))}
+          onClick={() => {
+            navigate("cities");
+            dispatch(setIsSidebarOpen(!isSideBarOpen));
+          }}
         />
       </div>
       <div className={styles.deviderVertical}>

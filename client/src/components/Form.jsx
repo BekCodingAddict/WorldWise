@@ -15,6 +15,7 @@ import { useUrlPosition } from "../hooks/useUrlPosition";
 import BackButton from "./BackButton";
 import Button from "./Button";
 import styles from "./Form.module.css";
+import { useNavigate } from "react-router-dom";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -34,6 +35,7 @@ function Form() {
   const [emoji, setEmoji] = useState("");
   const [geoCodingError, setGeoCodingError] = useState("");
   const { addCity, isAdding } = useAddCity();
+  const navigate = useNavigate();
 
   useEffect(
     function () {
@@ -94,45 +96,45 @@ function Form() {
     }
   }
   return (
-    <>
-      <form
-        className={`${styles.form} ${isAdding ? styles.loading : ""}`}
-        onSubmit={handleSubmit}
-      >
-        <div className={styles.row}>
-          <label htmlFor="cityName">City name</label>
-          <input
-            id="cityName"
-            onChange={(e) => setCityName(e.target.value)}
-            value={cityName}
-          />
-          <span className={styles.flag}>{emoji}</span>
-        </div>
-
-        <div className={styles.row}>
-          <label htmlFor="date">When did you go to {cityName}?</label>
-        </div>
-        <DatePicker
-          id="date"
-          onChange={(date) => setDate(date)}
-          selected={date}
-          dateFormat={"dd/MM/yyyy"}
+    <form
+      className={`${styles.form} ${isAdding ? styles.loading : ""}`}
+      onSubmit={handleSubmit}
+    >
+      <div className={styles.row}>
+        <label htmlFor="cityName">City name</label>
+        <input
+          id="cityName"
+          onChange={(e) => setCityName(e.target.value)}
+          value={cityName}
         />
-        <div className={styles.row}>
-          <label htmlFor="notes">Notes about your trip to {cityName}</label>
-          <textarea
-            id="notes"
-            onChange={(e) => setNotes(e.target.value)}
-            value={notes}
-          />
-        </div>
+        <span className={styles.flag}>{emoji}</span>
+      </div>
 
-        <div className={styles.buttons}>
-          <Button type="primary">Add</Button>
-          <BackButton />
-        </div>
-      </form>
-    </>
+      <div className={styles.row}>
+        <label htmlFor="date">When did you go to {cityName}?</label>
+      </div>
+      <DatePicker
+        id="date"
+        onChange={(date) => setDate(date)}
+        selected={date}
+        dateFormat={"dd/MM/yyyy"}
+      />
+      <div className={styles.row}>
+        <label htmlFor="notes">Notes about your trip to {cityName}</label>
+        <textarea
+          id="notes"
+          onChange={(e) => setNotes(e.target.value)}
+          value={notes}
+        />
+      </div>
+
+      <div className={styles.buttons}>
+        <Button type="primary">Add</Button>
+        <Button type={"back"} onClick={() => navigate("/app")}>
+          Cencel
+        </Button>
+      </div>
+    </form>
   );
 }
 
