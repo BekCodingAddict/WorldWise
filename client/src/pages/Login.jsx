@@ -49,7 +49,7 @@ export default function Login() {
             id="email"
             name="email"
             placeholder="Email"
-            defaultValue={"john@gmail.com"}
+            // defaultValue={"john@gmail.com"}
           />
         </div>
 
@@ -60,7 +60,7 @@ export default function Login() {
             id="password"
             name="password"
             placeholder="Password"
-            defaultValue={"1234"}
+            // defaultValue={"1234"}
           />
         </div>
         <p className={styles.text}>
