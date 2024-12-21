@@ -85,7 +85,7 @@ WorldWise는 React 기반의 여행 추적 애플리케이션으로, 세계 여�
 ## Errors:
 ### 1.React Query States are Frist render undefined 
 
-This is my custom hook.Here data is initially undefined.
+This is my custom hook. Here data is initially undefined.
 ```javascript
 export function useCities2() {
   const {
@@ -102,7 +102,7 @@ export function useCities2() {
   return { isLoading, error, data };
 }
 ```
-So if want to use like
+So if we want to use like
 ```javascript
   const { data } = useCities2(); // Frist render data undefined so error is occoured 
   const { cities } = data; //
