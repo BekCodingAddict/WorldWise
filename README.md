@@ -20,12 +20,12 @@ WorldWise는 React 기반의 여행 추적 애플리케이션으로, 세계 여�
 - <code>feature/v-2.0.0</code>: 이 버전에서는 ReactQuery/TanStack을 사용해 모든 UI 상태를 원격 상태로 전환했으며, 일부 글로벌 UI 상태를 관리하기 위해 React Redux Toolkit을 도입했습니다.
 
 ## 사용 기술
-- <b>프론트엔드:</b> React,Vite,React Leaflet,React Router DOM, Date Picker,React Toast,JavaScript,HTML,CSS 모듈
-- <b>지도 도구:</b> Leaflet.js를 사용한 인터랙티브 지도 구현
-- <b>상태 관리:</b> Context API 및 Redux/Toolkit를 활용해 애플리케이션 상태 관리
+- <b>프론트엔드:</b> <i>[React,Vite,React Leaflet,React Router DOM, Date Picker,React Toast,JavaScript,HTML,CSS 모듈]</i>
+- <b>지도 도구:</b> <i>[Leaflet.js를 사용한 인터랙티브 지도 구현]</i>
+- <b>상태 관리:</b> <i>[Context API 및 Redux/Toolkit를 활용해 애플리케이션 상태 관리]</i>
 - <b>데이터 저장:</b>
-  - <code>feature/v-1.0.0</code>: 지속적인 데이터를 위해 로컬 저장소 또는 JSON 서버 사용
-  - <code>feature/v-2.0.0</code>: MongoDB를 사용하여 비정형 데이터를 처리 사용
+  - <code>feature/v-1.0.0</code>: <i>[지속적인 데이터를 위해 로컬 저장소 또는 JSON 서버 사용]</i>
+  - <code>feature/v-2.0.0</code>:<i> [MongoDB를 사용하여 비정형 데이터를 처리 사용]</i>
 
 ## 개인 기여 사항
 ### 1.향상된 반응형 디자인
