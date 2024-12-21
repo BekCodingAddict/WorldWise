@@ -1,27 +1,43 @@
-import { useEffect, useState } from "react";
-import styles from "./Login.module.css";
-import PageNav from "../components/PageNav";
-import { useAuth } from "../contexts/FakeAuthContext";
+import axios from "axios";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "../components/Button";
+import PageNav from "../components/PageNav";
+import styles from "./Login.module.css";
 
 export default function Login() {
-  // PRE-FILL FOR DEV PURPOSES
-  const [email, setEmail] = useState("jack@example.com");
-  const [password, setPassword] = useState("qwerty");
-  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) navigate("/app", { replace: true });
-  }, [isAuthenticated, navigate]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email && password) {
-      login(email, password);
+    try {
+      const formData = new FormData(e.target);
+      const userData = {
+        email: formData.get("email"),
+        password: formData.get("password"),
+      };
+
+      const response = await axios.post("/api/users/login", userData);
+      if (response.data.success) {
+        toast.success(response.data.message, { autoClose: 1500 });
+        localStorage.setItem("token", response.data.data);
+        navigate("/app", { replace: true });
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/app");
+    }
+  }, [navigate]);
+
   return (
     <main className={styles.login}>
       <PageNav />
@@ -31,8 +47,9 @@ export default function Login() {
           <input
             type="email"
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            name="email"
+            placeholder="Email"
+            // defaultValue={"john@gmail.com"}
           />
         </div>
 
@@ -41,8 +58,9 @@ export default function Login() {
           <input
             type="password"
             id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
+            name="password"
+            placeholder="Password"
+            // defaultValue={"1234"}
           />
         </div>
         <p className={styles.text}>

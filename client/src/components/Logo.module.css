@@ -1,5 +1,5 @@
 .logo {
-  height: 5.2rem;
+  height: 4.5rem;
   max-width: 100%;
 }
 
@@ -9,9 +9,23 @@
   left: 0.8rem;
 }
 
+@media screen and (max-width: 1024px) {
+  .logo {
+    height: 4rem;
+    max-width: 100%;
+  }
+}
+
 @media screen and (max-width: 640px) {
   .logo {
-    height: 3dvh;
+    height: 3.5rem;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .logo {
+    height: 2.8rem;
     max-width: 100%;
   }
 }

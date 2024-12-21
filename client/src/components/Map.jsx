@@ -1,28 +1,36 @@
-import { useSearchParams, useNavigate } from "react-router-dom";
-import styles from "./Map.module.css";
+import { useEffect, useState } from "react";
 import {
   MapContainer,
-  TileLayer,
   Marker,
   Popup,
+  TileLayer,
   useMap,
   useMapEvent,
 } from "react-leaflet";
-import { useEffect, useState } from "react";
-import { useCities } from "../contexts/CityContext";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
+import { useCities } from "../hooks/useCities";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import styles from "./Map.module.css";
 
+import { reverseGeocode } from "../services/apiCities";
 import Button from "./Button";
 
 function Map() {
+  const navigate = useNavigate();
   const [mapPosition, setMapPosition] = useState([40, 0]);
-  const { cities } = useCities();
+  const [myCurrentPosition, setMyCurrentPosition] = useState({});
+  const { data } = useCities();
+  const { cities } = data;
+  const location = useLocation();
+
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
     getPosition,
   } = useGeolocation();
+
   const [mapLat, mapLng] = useUrlPosition();
 
   useEffect(() => {
@@ -30,9 +38,17 @@ function Map() {
   }, [mapLat, mapLng]);
 
   useEffect(() => {
-    if (geolocationPosition)
-      setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
-  }, [geolocationPosition]);
+    const isPositionExist = async () => {
+      if (geolocationPosition) {
+        const { address } = await reverseGeocode(geolocationPosition);
+        setMyCurrentPosition(address);
+        setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+
+        return address;
+      }
+    };
+    isPositionExist();
+  }, [geolocationPosition, setMyCurrentPosition, navigate]);
 
   return (
     <div className={styles.mapContainer}>
@@ -41,6 +57,7 @@ function Map() {
           {isLoadingPosition ? "Loading..." : "Use Your Position"}
         </Button>
       )}
+      {location.pathname === "/app/form" && <Outlet />}
       <MapContainer
         center={mapPosition}
         zoom={8}
@@ -51,10 +68,10 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
-        {cities.map((city) => (
+        {cities?.map((city) => (
           <Marker
             position={[city.position.lat, city.position.lng]}
-            key={city.id}
+            key={`${city.position.lat}+${city.position.lng}`}
           >
             <Popup>
               <span>{city.emoji}</span>
@@ -66,8 +83,8 @@ function Map() {
         {geolocationPosition && (
           <Marker position={geolocationPosition}>
             <Popup>
-              <span>Emoji</span>
-              <span>City Name</span>
+              <span>{myCurrentPosition?.country_code?.toUpperCase()}</span>
+              <span>{myCurrentPosition?.city}</span>
             </Popup>
           </Marker>
         )}
@@ -88,7 +105,7 @@ function DetectClick() {
   const navigate = useNavigate();
 
   useMapEvent({
-    click: (e) => navigate(`form`), //?lat=${e.latlng.lat}&lng=${e.latlng.lng}
+    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`), //?lat=${e.latlng.lat}&lng=${e.latlng.lng}
   });
 }
 

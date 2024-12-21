@@ -1,6 +1,7 @@
-import { useCities } from "../contexts/CityContext";
-import styles from "./CityItem.module.css";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDeleteCity } from "../hooks/useDeleteCity";
+import styles from "./CityItem.module.css";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -10,21 +11,22 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function CityItem({ city }) {
-  const { cityName, emoji, date, id, position } = city;
-  const { currentCity, deleteCity } = useCities();
+  const { cityName, emoji, date, _id, position } = city;
+  const { currentCity } = useSelector((state) => state.currentCity);
+  const { deleteCity } = useDeleteCity();
 
   const handleClick = (e) => {
     e.preventDefault();
-    deleteCity(id);
+    if (confirm("Are you sure about delete this city?")) deleteCity(_id);
   };
 
   return (
     <li>
       <Link
         className={`${styles.cityItem} ${
-          id === currentCity.id ? styles["cityItem--active"] : ""
+          _id === currentCity._id ? styles["cityItem--active"] : ""
         }`}
-        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
+        to={`${_id}?lat=${position.lat}&lng=${position.lng}`}
       >
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
